@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="edu.school21.clientTanks.controller.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1024.0" styleClass="bodybg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="edu.school21.clientTanks.controller.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1024.0" styleClass="bodybg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea">
    <children>
       <ImageView fx:id="player" fitHeight="105.0" fitWidth="81.0" layoutX="272.0" layoutY="874.0" pickOnBounds="true" preserveRatio="true">
          <image>
