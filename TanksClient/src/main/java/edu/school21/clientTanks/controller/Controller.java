@@ -16,9 +16,9 @@ public class Controller {
     }
     public  void moveImageLeft( KeyCode keyCode) {
         if (keyCode == KeyCode.LEFT) {
-            enemy.setTranslateX(enemy.getTranslateX() - 10);
+            player.setTranslateX(player.getTranslateX() - 10);
         } else if (keyCode == KeyCode.RIGHT) {
-            enemy.setTranslateX(enemy.getTranslateX() + 10);
+            player.setTranslateX(player.getTranslateX() + 10);
         }
 
     }
