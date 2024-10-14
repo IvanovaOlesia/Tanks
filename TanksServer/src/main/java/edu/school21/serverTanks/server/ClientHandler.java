@@ -1,9 +1,14 @@
 package edu.school21.serverTanks.server;
 
+import com.google.gson.Gson;
+import edu.school21.serverTanks.dataGame.PlayerData;
+
 import java.io.*;
 import java.net.Socket;
 
 public class ClientHandler implements Runnable{
+    private PlayerData playerData;
+    private PlayerData enemyData;
     private Socket player;
     private Socket enemy;
     private BufferedReader playerBufferedReader;
@@ -17,26 +22,49 @@ public class ClientHandler implements Runnable{
         this.playerBufferedWriter = new BufferedWriter(new OutputStreamWriter(player.getOutputStream()));
         this.enamyBufferedReader = new BufferedReader(new InputStreamReader(enemy.getInputStream()));
         this.enamyBufferedWriter = new BufferedWriter(new OutputStreamWriter(enemy.getOutputStream()));
+        this.playerData = new PlayerData(14,14);
+        this.enemyData = new PlayerData(14,14);
     }
 
 
     @Override
     public void run() {
         try {
-            sendMessageToPlayer("Start game");
-            sendMessageToEnemy("Start game");
+            sendMessageToPlayer(playerData);
+            sendMessageToEnemy(enemyData);
+            while (true){
+                getActionClient();
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void sendMessageToPlayer(String message) throws IOException {
-        playerBufferedWriter.write(message);
+    private void getActionClient() throws IOException {
+        String action = playerBufferedReader.readLine();
+        if (action.equals("LEFT")){
+            playerData.setLayoutPlayerX(playerData.getLayoutPlayerX() - 10);
+            enemyData.setLayoutEnemyX(enemyData.getLayoutEnemyX() - 10);
+            sendMessageToPlayer(playerData);
+            sendMessageToEnemy(enemyData);
+        } else if (action.equals("RIGHT")) {
+            playerData.setLayoutPlayerX(playerData.getLayoutPlayerX() + 10);
+            enemyData.setLayoutEnemyX(enemyData.getLayoutEnemyX() + 10);
+            sendMessageToPlayer(playerData);
+            sendMessageToEnemy(enemyData);
+
+        }
+    }
+
+    private void sendMessageToPlayer(PlayerData playerData) throws IOException {
+        String json = new Gson().toJson(playerData);
+        playerBufferedWriter.write(json);
         playerBufferedWriter.newLine();
         playerBufferedWriter.flush();
     }
-    private void sendMessageToEnemy(String message) throws IOException {
-        enamyBufferedWriter.write(message);
+    private void sendMessageToEnemy(PlayerData playerData) throws IOException {
+        String json = new Gson().toJson(playerData);
+        enamyBufferedWriter.write(json);
         enamyBufferedWriter.newLine();
         enamyBufferedWriter.flush();
     }
