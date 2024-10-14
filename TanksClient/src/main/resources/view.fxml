@@ -13,7 +13,7 @@
       </ImageView>
       <ProgressBar id="hpEnemy" layoutX="810.0" layoutY="14.0" prefWidth="200.0" progress="0.0" style="-fx-background-color: red;" />
       <ProgressBar id="hpPlayer" layoutX="14.0" layoutY="990.0" prefWidth="200.0" progress="0.0" />
-      <ImageView id="enemy" fitHeight="106.0" fitWidth="82.0" layoutX="577.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="enemy" fitHeight="106.0" fitWidth="82.0" layoutX="577.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@enemydown.png" />
          </image>
