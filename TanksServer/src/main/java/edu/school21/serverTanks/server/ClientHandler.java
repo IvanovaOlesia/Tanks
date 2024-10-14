@@ -16,6 +16,16 @@ public class ClientHandler implements Runnable{
 
     @Override
     public void run() {
+        try {
+            sendMessageToClient("Start game");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    private void sendMessageToClient(String message) throws IOException {
+        bufferedWriter.write(message);
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
     }
 }
