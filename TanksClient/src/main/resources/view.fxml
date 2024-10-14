@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="edu.school21.clientTanks.controller.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1024.0" styleClass="bodybg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1024.0" styleClass="bodybg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.school21.clientTanks.controller.Controller">
    <children>
-      <ImageView fx:id="player" fitHeight="105.0" fitWidth="81.0" layoutX="272.0" layoutY="874.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player" fitHeight="105.0" fitWidth="81.0" layoutX="247.0" layoutY="852.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@playerup.png" />
+         </image>
+      </ImageView>
+      <ProgressBar id="hpEnemy" layoutX="810.0" layoutY="14.0" prefWidth="200.0" progress="0.0" style="-fx-background-color: red;" />
+      <ProgressBar id="hpPlayer" layoutX="14.0" layoutY="990.0" prefWidth="200.0" progress="0.0" />
+      <ImageView id="enemy" fitHeight="106.0" fitWidth="82.0" layoutX="577.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@enemydown.png" />
          </image>
       </ImageView>
    </children>
