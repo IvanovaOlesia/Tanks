@@ -1,4 +1,5 @@
 package edu.school21.clientTanks.app;
+import edu.school21.clientTanks.client.Client;
 import edu.school21.clientTanks.controller.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +18,8 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
         Scene scene = new Scene(fxmlLoader.load(),1024, 1024);
         Controller controller = fxmlLoader.getController();
-        scene.setOnKeyPressed(event -> {
-            controller.moveImageLeft(event.getCode());
-        });
+        Client client  = new Client(controller, scene);
+        client.startClient();
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
