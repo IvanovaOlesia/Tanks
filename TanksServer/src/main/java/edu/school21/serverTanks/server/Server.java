@@ -15,7 +15,7 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(PORT);
         Socket player = serverSocket.accept();
         Socket enemy = serverSocket.accept();
-        new Thread(new ClientHandler(player)).start();
-        new Thread(new ClientHandler(enemy)).start();
+        new Thread(new ClientHandler(player, enemy)).start();
+        new Thread(new ClientHandler(enemy,player)).start();
     }
 }
