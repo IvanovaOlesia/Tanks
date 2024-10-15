@@ -5,6 +5,7 @@ import edu.school21.clientTanks.JSONModel.GameData;
 
 import java.util.Scanner;
 import com.google.gson.Gson;
+import javafx.application.Platform;
 
 public class ReadThread implements Runnable{
     private Scanner in;
@@ -18,7 +19,19 @@ public class ReadThread implements Runnable{
     public void run() {
         while (in.hasNext()){
             GameData playerData = new Gson().fromJson(in.nextLine(), GameData.class);
-            view.moveTank(playerData);
+            if (playerData.wasShot()) {
+                Platform.runLater(() -> {
+                    view.setBulletToField(playerData);
+                });
+            } else if (playerData.isMoveBullet()){
+                Platform.runLater(() -> {
+                    view.moveBullet(playerData);
+                });
+            } else {
+                Platform.runLater(() -> {
+                    view.moveTank(playerData);
+                });
+            }
         }
     }
 }

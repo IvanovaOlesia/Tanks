@@ -15,15 +15,15 @@ public class ClientHandler implements Runnable{
     private BufferedWriter playerBufferedWriter;
     private BufferedReader enamyBufferedReader;
     private BufferedWriter enamyBufferedWriter;
-    public ClientHandler(Socket player, Socket enemy) throws IOException {
+    public ClientHandler(Socket player, Socket enemy, GameData playerData, GameData enemyData) throws IOException {
         this.player = player;
         this.enemy = enemy;
         this.playerBufferedReader = new BufferedReader(new InputStreamReader(player.getInputStream()));
         this.playerBufferedWriter = new BufferedWriter(new OutputStreamWriter(player.getOutputStream()));
         this.enamyBufferedReader = new BufferedReader(new InputStreamReader(enemy.getInputStream()));
         this.enamyBufferedWriter = new BufferedWriter(new OutputStreamWriter(enemy.getOutputStream()));
-        this.playerData = new GameData(14,14);
-        this.enemyData = new GameData(14,14);
+        this.playerData = playerData;
+        this.enemyData = enemyData;
     }
 
 
@@ -44,16 +44,44 @@ public class ClientHandler implements Runnable{
         String action = playerBufferedReader.readLine();
         if (action.equals("LEFT")){
             playerData.setLayoutPlayerX(playerData.getLayoutPlayerX() - 10);
-            enemyData.setLayoutEnemyX(enemyData.getLayoutEnemyX() - 10);
+            enemyData.setLayoutEnemyX(enemyData.getLayoutEnemyX() + 10);
             sendMessageToPlayer(playerData);
             sendMessageToEnemy(enemyData);
         } else if (action.equals("RIGHT")) {
             playerData.setLayoutPlayerX(playerData.getLayoutPlayerX() + 10);
-            enemyData.setLayoutEnemyX(enemyData.getLayoutEnemyX() + 10);
+            enemyData.setLayoutEnemyX(enemyData.getLayoutEnemyX() - 10);
             sendMessageToPlayer(playerData);
             sendMessageToEnemy(enemyData);
+        } else if (action.equals("SPACE")) {
+            playerData.isShot();
+            enemyData.isShot();
+            playerData.setLayoutBulletUpX(playerData.getLayoutPlayerX() + 38);
+            enemyData.setLayoutBulletUpX(enemyData.getLayoutPlayerX() + 38);
+            playerData.setLayoutBulletUpY(863);
+            enemyData.setLayoutBulletUpY(149);
+            sendMessageToPlayer(playerData);
+            sendMessageToEnemy(enemyData);
+            playerData.isNotShot();
+            enemyData.isNotShot();
+            playerData.startBulletMoving();
+            enemyData.startBulletMoving();
+            while (playerData.isMoveBullet()){
+                playerData.setLayoutBulletUpY(playerData.getLayoutBulletUpY() - 1);
+                enemyData.setLayoutBulletUpY(enemyData.getLayoutBulletUpY() + 1);
+                if(isHittingTarget()){
+                    playerData.stopBulletMoving();
+                    enemyData.stopBulletMoving();
+                }
+                sendMessageToPlayer(playerData);
+                sendMessageToEnemy(enemyData);
 
+            }
         }
+    }
+
+    private boolean isHittingTarget() {
+        return ((playerData.getLayoutEnemyX() <= playerData.getLayoutBulletUpX() && playerData.getLayoutEnemyX() + 81 >= playerData.getLayoutBulletUpX() )
+                && (playerData.getLayoutBulletUpY() == 149 ));
     }
 
     private void sendMessageToPlayer(GameData playerData) throws IOException {
@@ -62,8 +90,8 @@ public class ClientHandler implements Runnable{
         playerBufferedWriter.newLine();
         playerBufferedWriter.flush();
     }
-    private void sendMessageToEnemy(GameData playerData) throws IOException {
-        String json = new Gson().toJson(playerData);
+    private void sendMessageToEnemy(GameData enemyData) throws IOException {
+        String json = new Gson().toJson(enemyData);
         enamyBufferedWriter.write(json);
         enamyBufferedWriter.newLine();
         enamyBufferedWriter.flush();
