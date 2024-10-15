@@ -7,7 +7,7 @@ module edu.school21.clientTanks {
     opens edu.school21.clientTanks.app to javafx.fxml;
     exports edu.school21.clientTanks.app ;
 
-    opens edu.school21.clientTanks.controller to javafx.fxml;
-    exports edu.school21.clientTanks.controller;
+    opens edu.school21.clientTanks.view to javafx.fxml;
+    exports edu.school21.clientTanks.view;
 
 }

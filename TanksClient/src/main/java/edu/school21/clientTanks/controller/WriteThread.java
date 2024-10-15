@@ -1,4 +1,4 @@
-package edu.school21.clientTanks.client;
+package edu.school21.clientTanks.controller;
 
 import javafx.scene.Scene;
 

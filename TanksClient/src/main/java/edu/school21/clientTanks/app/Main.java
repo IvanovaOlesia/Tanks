@@ -1,6 +1,6 @@
 package edu.school21.clientTanks.app;
-import edu.school21.clientTanks.client.Client;
 import edu.school21.clientTanks.controller.Controller;
+import edu.school21.clientTanks.view.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,8 +17,8 @@ public class Main extends Application {
         URL fxmlUrl = getClass().getResource("/view.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
         Scene scene = new Scene(fxmlLoader.load(),1024, 1024);
-        Controller controller = fxmlLoader.getController();
-        Client client  = new Client(controller, scene);
+        View view = fxmlLoader.getController();
+        Controller client  = new Controller(view, scene);
         client.startClient();
         stage.setScene(scene);
         stage.setResizable(false);
