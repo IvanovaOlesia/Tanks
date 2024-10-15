@@ -1,6 +1,6 @@
 package edu.school21.clientTanks.view;
 
-import edu.school21.clientTanks.dataGame.PlayerData;
+import edu.school21.clientTanks.JSONModel.GameData;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -23,7 +23,7 @@ public class View {
     public void initialize() {
 
     }
-    public void moveTank(PlayerData playerData) {
+    public void moveTank(GameData playerData) {
         player.setTranslateX(playerData.getLayoutPlayerX());
         enemy.setTranslateX(playerData.getLayoutEnemyX());
     }

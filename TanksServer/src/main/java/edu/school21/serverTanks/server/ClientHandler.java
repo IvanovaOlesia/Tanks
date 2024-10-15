@@ -1,14 +1,14 @@
 package edu.school21.serverTanks.server;
 
 import com.google.gson.Gson;
-import edu.school21.serverTanks.dataGame.PlayerData;
+import edu.school21.serverTanks.model.GameData;
 
 import java.io.*;
 import java.net.Socket;
 
 public class ClientHandler implements Runnable{
-    private PlayerData playerData;
-    private PlayerData enemyData;
+    private GameData playerData;
+    private GameData enemyData;
     private Socket player;
     private Socket enemy;
     private BufferedReader playerBufferedReader;
@@ -22,8 +22,8 @@ public class ClientHandler implements Runnable{
         this.playerBufferedWriter = new BufferedWriter(new OutputStreamWriter(player.getOutputStream()));
         this.enamyBufferedReader = new BufferedReader(new InputStreamReader(enemy.getInputStream()));
         this.enamyBufferedWriter = new BufferedWriter(new OutputStreamWriter(enemy.getOutputStream()));
-        this.playerData = new PlayerData(14,14);
-        this.enemyData = new PlayerData(14,14);
+        this.playerData = new GameData(14,14);
+        this.enemyData = new GameData(14,14);
     }
 
 
@@ -56,13 +56,13 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    private void sendMessageToPlayer(PlayerData playerData) throws IOException {
+    private void sendMessageToPlayer(GameData playerData) throws IOException {
         String json = new Gson().toJson(playerData);
         playerBufferedWriter.write(json);
         playerBufferedWriter.newLine();
         playerBufferedWriter.flush();
     }
-    private void sendMessageToEnemy(PlayerData playerData) throws IOException {
+    private void sendMessageToEnemy(GameData playerData) throws IOException {
         String json = new Gson().toJson(playerData);
         enamyBufferedWriter.write(json);
         enamyBufferedWriter.newLine();

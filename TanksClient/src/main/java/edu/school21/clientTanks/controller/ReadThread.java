@@ -1,7 +1,7 @@
 package edu.school21.clientTanks.controller;
 
 import edu.school21.clientTanks.view.View;
-import edu.school21.clientTanks.dataGame.PlayerData;
+import edu.school21.clientTanks.JSONModel.GameData;
 
 import java.util.Scanner;
 import com.google.gson.Gson;
@@ -17,7 +17,7 @@ public class ReadThread implements Runnable{
     @Override
     public void run() {
         while (in.hasNext()){
-            PlayerData playerData = new Gson().fromJson(in.nextLine(), PlayerData.class);
+            GameData playerData = new Gson().fromJson(in.nextLine(), GameData.class);
             view.moveTank(playerData);
         }
     }

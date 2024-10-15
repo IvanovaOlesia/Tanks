@@ -1,15 +1,13 @@
-package edu.school21.clientTanks.dataGame;
+package edu.school21.serverTanks.model;
 
-
-
-public class PlayerData {
+public class GameData {
     private int layoutPlayerX;
     private int layoutEnemyX;
 
-    public PlayerData() {
+    public GameData() {
     }
 
-    public PlayerData(int layoutPlayerX, int layoutEnemyX) {
+    public GameData(int layoutPlayerX, int layoutEnemyX) {
         this.layoutEnemyX = layoutEnemyX;
         this.layoutPlayerX = layoutPlayerX;
     }
