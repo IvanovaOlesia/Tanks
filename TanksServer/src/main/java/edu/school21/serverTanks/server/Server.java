@@ -8,7 +8,7 @@ import java.net.Socket;
 
 @Component
 public class Server {
-    private final int PORT = 8080;
+    private final int PORT = 8081;
 
 
     public void startServer() throws IOException {

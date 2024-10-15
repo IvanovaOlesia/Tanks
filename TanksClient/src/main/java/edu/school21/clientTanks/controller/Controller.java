@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Controller {
-    private final int PORT = 8080;
+    private final int PORT = 8081;
     private Scene scene;
     private View view;
     private Socket client;
