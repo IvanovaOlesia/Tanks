@@ -2,37 +2,42 @@ package edu.school21.clientTanks.JSONModel;
 
 
 public class GameData {
-    private int layoutPlayerX;
-    private int layoutEnemyX;
+    private double layoutPlayerX;
+    private double layoutEnemyX;
     private boolean shot;
+    private boolean destroyBullet;
     private boolean moveBullet;
-    private int layoutBulletDownX;
-    private int layoutBulletUpX;
-    private int layoutBulletDownY;
-    private int layoutBulletUpY;
+    private double layoutBulletDownX;
+    private double layoutBulletUpX;
+    private double layoutBulletDownY;
+    private double layoutBulletUpY;
 
     public GameData() {
     }
 
-    public GameData(int layoutPlayerX, int layoutEnemyX) {
-        this.layoutEnemyX = layoutEnemyX;
-        this.layoutPlayerX = layoutPlayerX;
-        this.shot = false;
+    public boolean isDestroyBullet() {
+        return destroyBullet;
     }
 
-    public int getLayoutPlayerX() {
+//    public GameData(double layoutPlayerX, double layoutEnemyX) {
+//        this.layoutEnemyX = layoutEnemyX;
+//        this.layoutPlayerX = layoutPlayerX;
+//        this.shot = false;
+//    }
+
+    public double getLayoutPlayerX() {
         return layoutPlayerX;
     }
 
-    public int getLayoutEnemyX() {
+    public double getLayoutEnemyX() {
         return layoutEnemyX;
     }
 
-    public void setLayoutPlayerX(int layoutPlayerX) {
+    public void setLayoutPlayerX(double layoutPlayerX) {
         this.layoutPlayerX = layoutPlayerX;
     }
 
-    public void setLayoutEnemyX(int layoutEnemyX) {
+    public void setLayoutEnemyX(double layoutEnemyX) {
         this.layoutEnemyX = layoutEnemyX;
     }
 
@@ -53,35 +58,35 @@ public class GameData {
         return shot;
     }
 
-    public int getLayoutBulletDownX() {
+    public double getLayoutBulletDownX() {
         return layoutBulletDownX;
     }
 
-    public int getLayoutBulletUpX() {
+    public double getLayoutBulletUpX() {
         return layoutBulletUpX;
     }
 
-    public void setLayoutBulletDownX(int layoutBulletDownX) {
+    public void setLayoutBulletDownX(double layoutBulletDownX) {
         this.layoutBulletDownX = layoutBulletDownX;
     }
 
-    public void setLayoutBulletUpX(int layoutBulletUpX) {
+    public void setLayoutBulletUpX(double layoutBulletUpX) {
         this.layoutBulletUpX = layoutBulletUpX;
     }
 
-    public int getLayoutBulletDownY() {
+    public double getLayoutBulletDownY() {
         return layoutBulletDownY;
     }
 
-    public int getLayoutBulletUpY() {
+    public double getLayoutBulletUpY() {
         return layoutBulletUpY;
     }
 
-    public void setLayoutBulletDownY(int layoutBulletDownY) {
+    public void setLayoutBulletDownY(double layoutBulletDownY) {
         this.layoutBulletDownY = layoutBulletDownY;
     }
 
-    public void setLayoutBulletUpY(int layoutBulletUpY) {
+    public void setLayoutBulletUpY(double layoutBulletUpY) {
         this.layoutBulletUpY = layoutBulletUpY;
     }
 }

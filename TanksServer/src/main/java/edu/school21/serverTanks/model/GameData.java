@@ -1,90 +1,100 @@
 package edu.school21.serverTanks.model;
 
 public class GameData {
-    private volatile int layoutPlayerX;
-    private volatile int layoutEnemyX;
-    private volatile boolean shot;
-    private volatile boolean moveBullet;
-    private volatile int layoutBulletDownX;
-    private volatile int layoutBulletUpX;
-    private volatile int layoutBulletDownY;
-    private volatile int layoutBulletUpY;
+    private  double layoutPlayerX;
+    private  double layoutEnemyX;
+    private  boolean shot;
+    private boolean destroyBullet;
+    private  boolean moveBullet;
+    private  double layoutBulletDownX;
+    private  double layoutBulletUpX;
+    private  double layoutBulletDownY;
+    private  double layoutBulletUpY;
 
     public GameData() {
     }
 
-    public GameData(int layoutPlayerX, int layoutEnemyX) {
+    public void setDestroyBullet(boolean destroyBullet) {
+        this.destroyBullet = destroyBullet;
+    }
+
+    public GameData(double layoutPlayerX, double layoutEnemyX) {
         this.layoutEnemyX = layoutEnemyX;
         this.layoutPlayerX = layoutPlayerX;
         this.shot = false;
         this.moveBullet = false;
+        this.destroyBullet = false;
+        layoutBulletDownX = -1;
+        layoutBulletUpX = -1;
+        layoutBulletDownY = -1;
+        layoutBulletUpY = -1;
     }
 
-    public synchronized int getLayoutPlayerX() {
+    public  double getLayoutPlayerX() {
         return layoutPlayerX;
     }
 
-    public synchronized int getLayoutEnemyX() {
+    public  double getLayoutEnemyX() {
         return layoutEnemyX;
     }
 
-    public synchronized void setLayoutPlayerX(int layoutPlayerX) {
+    public  void setLayoutPlayerX(double layoutPlayerX) {
         this.layoutPlayerX = layoutPlayerX;
     }
 
-    public synchronized void setLayoutEnemyX(int layoutEnemyX) {
+    public  void setLayoutEnemyX(double layoutEnemyX) {
         this.layoutEnemyX = layoutEnemyX;
     }
 
-    public synchronized void isShot() {
+    public  void isShot() {
         shot = true;
     }
-    public synchronized void isNotShot() {
+    public  void isNotShot() {
         shot = false;
     }
-    public synchronized void startBulletMoving(){
+    public  void startBulletMoving(){
         moveBullet = true;
     }
-    public synchronized void stopBulletMoving(){
+    public  void stopBulletMoving(){
         moveBullet = false;
     }
-    public synchronized boolean isMoveBullet(){
+    public  boolean isMoveBullet(){
         return moveBullet;
     }
 
-    public synchronized boolean wasShot() {
+    public  boolean wasShot() {
         return shot;
     }
 
-    public synchronized int getLayoutBulletDownX() {
+    public  double getLayoutBulletDownX() {
         return layoutBulletDownX;
     }
 
-    public synchronized int getLayoutBulletUpX() {
+    public  double getLayoutBulletUpX() {
         return layoutBulletUpX;
     }
 
-    public synchronized void setLayoutBulletDownX(int layoutBulletDownX) {
+    public  void setLayoutBulletDownX(double layoutBulletDownX) {
         this.layoutBulletDownX = layoutBulletDownX;
     }
 
-    public synchronized void setLayoutBulletUpX(int layoutBulletUpX) {
+    public  void setLayoutBulletUpX(double layoutBulletUpX) {
         this.layoutBulletUpX = layoutBulletUpX;
     }
 
-    public synchronized int getLayoutBulletDownY() {
+    public  double getLayoutBulletDownY() {
         return layoutBulletDownY;
     }
 
-    public synchronized int getLayoutBulletUpY() {
+    public  double getLayoutBulletUpY() {
         return layoutBulletUpY;
     }
 
-    public synchronized void setLayoutBulletDownY(int layoutBulletDownY) {
+    public  void setLayoutBulletDownY(double layoutBulletDownY) {
         this.layoutBulletDownY = layoutBulletDownY;
     }
 
-    public synchronized void setLayoutBulletUpY(int layoutBulletUpY) {
+    public  void setLayoutBulletUpY(double layoutBulletUpY) {
         this.layoutBulletUpY = layoutBulletUpY;
     }
 }

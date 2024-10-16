@@ -1,11 +1,16 @@
 package edu.school21.clientTanks.view;
 
 import edu.school21.clientTanks.JSONModel.GameData;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class View {
     @FXML
@@ -17,8 +22,8 @@ public class View {
     private Scene scene;
     private  String resourcePathToBulletDown = getClass().getResource("/bulletDown.png").toExternalForm();
     private  String getResourcePathToBulletUp = getClass().getResource("/bulletUp.png").toExternalForm();
-    private ImageView imageViewBulletDown;
-    private ImageView imageViewBulletUp;
+    private List<ImageView> imageViewBulletDownList = new ArrayList<>();
+    private List<ImageView> imageViewBulletUpList = new ArrayList<>();
 
 
     public View() {
@@ -38,24 +43,41 @@ public class View {
 
     }
     public void setBulletToField(GameData playerData){
-        Image imageBulletUp = new Image(getResourcePathToBulletUp);
-        imageViewBulletUp = new ImageView(imageBulletUp);
-        imageViewBulletUp.setLayoutX(playerData.getLayoutBulletUpX());
-        imageViewBulletUp.setLayoutY(863);
-        field.getChildren().add(imageViewBulletUp);
-        Image imageBulletDown = new Image(resourcePathToBulletDown);
-        imageViewBulletDown = new ImageView(imageBulletDown);
-        imageViewBulletDown.setLayoutX(playerData.getLayoutBulletUpX());
-        imageViewBulletDown.setLayoutY(149);
-        field.getChildren().add(imageViewBulletDown);
+        if (playerData.getLayoutBulletUpX() > 0 ) {
+            Image imageBulletUp = new Image(getResourcePathToBulletUp);
+            ImageView imageViewBulletUp = new ImageView(imageBulletUp);
+            imageViewBulletUp.setLayoutX(playerData.getLayoutBulletUpX());
+            imageViewBulletUp.setLayoutY(playerData.getLayoutBulletUpY());
+            field.getChildren().add(imageViewBulletUp);
+            imageViewBulletUpList.add(imageViewBulletUp);
+        }
+        if(playerData.getLayoutBulletDownX() > 0) {
+            Image imageBulletDown = new Image(resourcePathToBulletDown);
+            ImageView imageViewBulletDown = new ImageView(imageBulletDown);
+            imageViewBulletDown.setLayoutX(playerData.getLayoutBulletDownX());
+            imageViewBulletDown.setLayoutY(playerData.getLayoutBulletDownY());
+            field.getChildren().add(imageViewBulletDown);
+            imageViewBulletDownList.add(imageViewBulletDown);
+        }
     }
     public void moveBullet(GameData playerData){
-
-        imageViewBulletUp.setLayoutY(playerData.getLayoutBulletUpY());
-
-
-        imageViewBulletDown.setLayoutY(playerData.getLayoutBulletDownY());
-
-
+        if (imageViewBulletUpList != null ) {
+            imageViewBulletUpList.forEach(imageViewBulletUp -> imageViewBulletUp.setLayoutY(playerData.getLayoutBulletUpY()));
+        }
+        if (imageViewBulletDownList != null ) {
+            imageViewBulletDownList.forEach(imageViewBulletDown -> imageViewBulletDown.setLayoutY(playerData.getLayoutBulletDownY()));
+        }
+    }
+    public void destroyBullet(){
+//        imageViewBulletDown = null;
+//        imageViewBulletUp = null;
+        if (imageViewBulletUpList != null ) {
+            field.getChildren().remove(imageViewBulletUpList.get(0));
+            imageViewBulletUpList.remove(0);
+        }
+        if (imageViewBulletDownList != null ) {
+            field.getChildren().remove(imageViewBulletDownList.get(0));
+            imageViewBulletDownList.remove(0);
+        }
     }
 }
