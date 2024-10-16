@@ -14,6 +14,7 @@ public class Server {
     private GameData enemyData;
 
 
+
     public void startServer() throws IOException {
         ServerSocket serverSocket = new ServerSocket(PORT);
         Socket player = serverSocket.accept();
@@ -23,4 +24,6 @@ public class Server {
         new Thread(new ClientHandler(player, enemy, playerData,enemyData )).start();
         new Thread(new ClientHandler(enemy,player, enemyData,playerData )).start();
     }
+
+
 }
