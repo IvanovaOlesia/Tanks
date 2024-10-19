@@ -12,6 +12,7 @@ public class ClientHandler implements Runnable{
     private GameData enemyData;
     private Socket player;
     private Socket enemy;
+    private String action;
     private BufferedReader playerBufferedReader;
     private BufferedWriter playerBufferedWriter;
     private BufferedReader enamyBufferedReader;
@@ -33,18 +34,39 @@ public class ClientHandler implements Runnable{
         try {
             sendMessageToPlayer(playerData);
             sendMessageToEnemy(enemyData);
-            while (true){
-                getActionClient();
-            }
+//            while (true){
+//                getActionClient();
+//            }
+
+                startReading();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void getActionClient() throws IOException {
-        String action = playerBufferedReader.readLine();
+    public void startReading() {
+        Thread inputThread = new Thread(() -> {
+            try {
+                while (true) {
+                    action = playerBufferedReader.readLine();
+
+                    if (action == null) {
+                        break;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        inputThread.start();
+    }
+
+    private void handlePlayerAction(String action) throws IOException {
         PlayerActionHandler.handlePlayerAction(this,action,playerData,enemyData);
     }
+
+
 
     public void sendMessageToPlayer(GameData playerData) throws IOException {
         String json = new Gson().toJson(playerData);
@@ -57,5 +79,13 @@ public class ClientHandler implements Runnable{
         enamyBufferedWriter.write(json);
         enamyBufferedWriter.newLine();
         enamyBufferedWriter.flush();
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getAction() {
+        return action;
     }
 }

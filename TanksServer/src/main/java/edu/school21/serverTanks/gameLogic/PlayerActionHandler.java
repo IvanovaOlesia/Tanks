@@ -7,7 +7,7 @@ import edu.school21.serverTanks.server.Server;
 import java.io.IOException;
 
 public class PlayerActionHandler {
-    public static synchronized void handlePlayerAction(ClientHandler clientHandler, String action, GameData playerData, GameData enemyData) throws IOException {
+    public static  void handlePlayerAction(ClientHandler clientHandler, String action, GameData playerData, GameData enemyData) throws IOException {
         if (action.equals("LEFT")){
             PlayerMovementHandler.moveLeft(playerData, enemyData);
             clientHandler.sendMessageToPlayer(playerData);
