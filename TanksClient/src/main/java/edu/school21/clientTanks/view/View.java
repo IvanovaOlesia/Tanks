@@ -1,5 +1,6 @@
 package edu.school21.clientTanks.view;
 
+import edu.school21.clientTanks.JSONModel.Bullet;
 import edu.school21.clientTanks.JSONModel.GameData;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -62,10 +63,20 @@ public class View {
     }
     public void moveBullet(GameData playerData){
         if (imageViewBulletUpList != null ) {
-            imageViewBulletUpList.forEach(imageViewBulletUp -> imageViewBulletUp.setLayoutY(playerData.getLayoutBulletUpY()));
+            for (int i = 0; i < imageViewBulletUpList.size(); i++) {
+                if (playerData.getBulletUpList().get(i).getY() > 0) {
+                    imageViewBulletUpList.get(i).setLayoutY(playerData.getBulletUpList().get(i).getY());
+                }
+            }
+//            imageViewBulletUpList.forEach(imageViewBulletUp -> imageViewBulletUp.setLayoutY(playerData.getLayoutBulletUpY()));
         }
         if (imageViewBulletDownList != null ) {
-            imageViewBulletDownList.forEach(imageViewBulletDown -> imageViewBulletDown.setLayoutY(playerData.getLayoutBulletDownY()));
+            for (int i = 0; i < imageViewBulletDownList.size(); i++) {
+                if (playerData.getBulletDownList().get(i).getY() > 0) {
+                    imageViewBulletDownList.get(i).setLayoutY(playerData.getBulletDownList().get(i).getY());
+                }
+            }
+//            imageViewBulletDownList.forEach(imageViewBulletDown -> imageViewBulletDown.setLayoutY(playerData.getLayoutBulletDownY()));
         }
     }
     public void destroyBullet(){

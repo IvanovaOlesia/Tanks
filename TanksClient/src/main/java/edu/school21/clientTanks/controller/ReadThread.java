@@ -23,19 +23,21 @@ public class ReadThread implements Runnable{
                 Platform.runLater(() -> {
                     view.setBulletToField(playerData);
                 });
-            } else if (playerData.isMoveBullet()){
+            }
+            if (playerData.isMoveBullet()){
                 Platform.runLater(() -> {
                     view.moveBullet(playerData);
                 });
-            } else if (playerData.isDestroyBullet()) {
+            }
+            if (playerData.isDestroyBullet()) {
                 Platform.runLater(() -> {
                     view.destroyBullet();
                 });
-            } else {
+            }
                 Platform.runLater(() -> {
                     view.moveTank(playerData);
                 });
-            }
+
         }
     }
 }

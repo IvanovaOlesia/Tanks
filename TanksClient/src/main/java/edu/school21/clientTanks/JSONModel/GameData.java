@@ -1,6 +1,8 @@
 package edu.school21.clientTanks.JSONModel;
 
 
+import java.util.List;
+
 public class GameData {
     private double layoutPlayerX;
     private double layoutEnemyX;
@@ -11,8 +13,18 @@ public class GameData {
     private double layoutBulletUpX;
     private double layoutBulletDownY;
     private double layoutBulletUpY;
+    private List<Bullet> bulletUpList;
+    private List<Bullet> bulletDownList;
 
     public GameData() {
+    }
+
+    public List<Bullet> getBulletUpList() {
+        return bulletUpList;
+    }
+
+    public List<Bullet> getBulletDownList() {
+        return bulletDownList;
     }
 
     public boolean isDestroyBullet() {

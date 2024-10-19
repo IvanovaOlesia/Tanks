@@ -1,5 +1,8 @@
 package edu.school21.serverTanks.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameData {
     private  double layoutPlayerX;
     private  double layoutEnemyX;
@@ -10,8 +13,26 @@ public class GameData {
     private  double layoutBulletUpX;
     private  double layoutBulletDownY;
     private  double layoutBulletUpY;
+    private List<Bullet> bulletUpList;
+    private List<Bullet> bulletDownList;
 
     public GameData() {
+    }
+
+    public List<Bullet> getBulletUpList() {
+        return bulletUpList;
+    }
+
+    public void setBulletUpList(List<Bullet> bulletUpList) {
+        this.bulletUpList = bulletUpList;
+    }
+
+    public List<Bullet> getBulletDownList() {
+        return bulletDownList;
+    }
+
+    public void setBulletDownList(List<Bullet> bulletDownList) {
+        this.bulletDownList = bulletDownList;
     }
 
     public void setDestroyBullet(boolean destroyBullet) {
@@ -28,6 +49,8 @@ public class GameData {
         layoutBulletUpX = -1;
         layoutBulletDownY = -1;
         layoutBulletUpY = -1;
+        bulletUpList = new ArrayList<>();
+        bulletDownList = new ArrayList<>();
     }
 
     public  double getLayoutPlayerX() {

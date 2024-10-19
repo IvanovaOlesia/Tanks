@@ -3,6 +3,9 @@ package edu.school21.serverTanks.server;
 import com.google.gson.Gson;
 import edu.school21.serverTanks.gameLogic.PlayerActionHandler;
 import edu.school21.serverTanks.model.GameData;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import java.io.*;
 import java.net.Socket;
@@ -17,6 +20,8 @@ public class ClientHandler implements Runnable{
     private BufferedWriter playerBufferedWriter;
     private BufferedReader enamyBufferedReader;
     private BufferedWriter enamyBufferedWriter;
+    private BlockingQueue<String> queue;
+    private ActionHandler actionHandler;
     public ClientHandler(Socket player, Socket enemy, GameData playerData, GameData enemyData) throws IOException {
         this.player = player;
         this.enemy = enemy;
@@ -26,48 +31,31 @@ public class ClientHandler implements Runnable{
         this.enamyBufferedWriter = new BufferedWriter(new OutputStreamWriter(enemy.getOutputStream()));
         this.playerData = playerData;
         this.enemyData = enemyData;
+        this.queue = new LinkedBlockingQueue<>();
+        actionHandler = new ActionHandler(playerBufferedReader ,queue);
     }
 
 
     @Override
     public void run() {
         try {
+            new Thread(actionHandler).start();
             sendMessageToPlayer(playerData);
             sendMessageToEnemy(enemyData);
-//            while (true){
-//                getActionClient();
-//            }
-
-                startReading();
-
-        } catch (IOException e) {
+                while (true){
+                    String action = queue.poll(100, TimeUnit.MILLISECONDS);
+                        handlePlayerAction(action);
+                }
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void startReading() {
-        Thread inputThread = new Thread(() -> {
-            try {
-                while (true) {
-                    action = playerBufferedReader.readLine();
 
-                    if (action == null) {
-                        break;
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        inputThread.start();
-    }
 
     private void handlePlayerAction(String action) throws IOException {
         PlayerActionHandler.handlePlayerAction(this,action,playerData,enemyData);
     }
-
-
-
     public void sendMessageToPlayer(GameData playerData) throws IOException {
         String json = new Gson().toJson(playerData);
         playerBufferedWriter.write(json);
